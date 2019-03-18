@@ -20,6 +20,7 @@ class ViewController: UIViewController {
     var timeInterval : Double = 20
     var batchNumbersArray = [Double]()
     var percentage = 0
+    var lastActivityCheat = false
     
     @IBOutlet weak var topLabel: UILabel!
     @IBOutlet weak var healthContainer: UIView!
@@ -73,39 +74,44 @@ class ViewController: UIViewController {
                     
                     if abs(gravity.z) > 0.87 && (abs(motion.userAcceleration.x) > 0.7 || abs(motion.userAcceleration.y) > 0.7) {
                         self.cheatingDetected(str : "FUSK1")
+                        self.lastActivityCheat = true
                     }
                         
                     else if abs(gravity.x) > 0.5 && (abs(motion.userAcceleration.z) > 0.7 || abs(motion.userAcceleration.y) > 0.7) {
                         self.cheatingDetected(str : "FUSK2")
+                        self.lastActivityCheat = true
                     }
                         
                     else if abs(gravity.y) > 0.5 && (abs(motion.userAcceleration.x) > 0.7 || abs(motion.userAcceleration.z) > 0.7) {
                         self.cheatingDetected(str : "FUSK3")
+                        self.lastActivityCheat = true
                     }
                     else{
-                        
-                        self.view.backgroundColor = .black
-                        
-                        if percentage > 50{
-                            self.healthView.backgroundColor = .green
+                        if self.lastActivityCheat == true{
+                            self.lastActivityCheat = false
                         }
-                        self.accelerationArray.append(self.acceleration)
-                        
-                        // Add Values to Array
-                        self.batchNumbersArray.append(self.accelerationArray[self.currentNode])
-                        
-                        // The Latest Node Number
-                        self.currentNode += 1
-                        
-                        // Every Second
-                        if self.currentNode % Int(self.timeInterval) == 0 {
-                            print("20")
-                            self.calculateActivityFactor(activityArray: self.batchNumbersArray)
-                            // kalla på funktion; (räkna ihop alla värden, medelvärdet (hastighet))
+                        else{
+                            self.lastActivityCheat = false
+                            self.view.backgroundColor = .black
                             
-                            // Töm arrayen
-                            self.batchNumbersArray.removeAll()
+                            self.accelerationArray.append(self.acceleration)
                             
+                            // Add Values to Array
+                            self.batchNumbersArray.append(self.accelerationArray[self.currentNode])
+                            
+                            // The Latest Node Number
+                            self.currentNode += 1
+                            
+                            // Every Second
+                            if self.currentNode % Int(self.timeInterval) == 0 {
+                                print("20")
+                                self.calculateActivityFactor(activityArray: self.batchNumbersArray)
+                                // kalla på funktion; (räkna ihop alla värden, medelvärdet (hastighet))
+                                
+                                // Töm arrayen
+                                self.batchNumbersArray.removeAll()
+                                
+                            }
                         }
                     }
                     
@@ -145,8 +151,12 @@ class ViewController: UIViewController {
                     self.view.layoutIfNeeded()
                 }
                 
-                let percentage =  Int(100 - (self.healthConstraintToTop.constant / 4))
+                self.percentage =  Int(100 - (self.healthConstraintToTop.constant / 4))
                 self.percentageLabel.text = "\(percentage)%"
+                
+                if self.percentage > 50{
+                    self.healthView.backgroundColor = .green
+                }
                 
             }
            

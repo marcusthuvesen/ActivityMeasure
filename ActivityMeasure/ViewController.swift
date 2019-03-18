@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     let motionManager = CMMotionManager()
     var currentNode = 0
     var acceleration : Double = 0
-    var timeInterval : Double = 20
+    var timeInterval : Double = 40
     var batchNumbersArray = [Double]()
     var percentage = 0
     var lastActivityCheat = false
@@ -63,13 +63,7 @@ class ViewController: UIViewController {
                 
                 
                 let gravity = motion.gravity
-                let rotation = atan2(gravity.x, gravity.y) + .pi
-                //            print("X + \(gravity.x)")
-                //            print("Y + \(gravity.y)")
-                //            print("Z + \(gravity.z)")
-                let roundedGravityX = round(gravity.x * 100) / 100
-                let roundedGravityY = round(gravity.y * 100) / 100
-                let roundedGravityZ = round(gravity.z * 100) / 100
+               
                 OperationQueue.main.addOperation {
                     
                     //IF CHEATING
@@ -96,7 +90,13 @@ class ViewController: UIViewController {
                             self.lastActivityCheat = false
                             self.view.backgroundColor = .black
                             
+                            //When hit hard, not normal behaviour
+                            if self.acceleration > 1.9{
+                                print("Aktivitet ÖVER TVÅÅÅ")
+                                self.lastActivityCheat = true
+                            }
                             self.accelerationArray.append(self.acceleration)
+                            
                             
                             // Add Values to Array
                             self.batchNumbersArray.append(self.accelerationArray[self.currentNode])
@@ -105,7 +105,7 @@ class ViewController: UIViewController {
                             self.currentNode += 1
                             
                             // Every Second
-                            if self.currentNode % Int(self.timeInterval) == 0 {
+                            if self.currentNode % Int(self.timeInterval) == 0 && self.lastActivityCheat == false{
                                 print("20")
                                 self.calculateActivityFactor(activityArray: self.batchNumbersArray)
                                 // kalla på funktion; (räkna ihop alla värden, medelvärdet (hastighet))
@@ -139,13 +139,13 @@ class ViewController: UIViewController {
         
         // Get the speed of activity by dividing sum of values with nodes/.count
         let activityFactor = activitySum / Double(activityArray.count)
-        if activityFactor > 0.5{
+        if activityFactor > 0.5 && activityFactor < 1.7{
             activityFilter(activityFactor: Double(activityFactor))
         }
     }
     
     func activityFilter(activityFactor : Double){
-        if activityFactor < 2 {
+        
             print("ActivityFactor: \(activityFactor)")
             topLabel.text = "Godkänt!"
             if self.healthConstraintToTop.constant != 0{
@@ -163,7 +163,7 @@ class ViewController: UIViewController {
                 
             }
            
-        }
+        
     }
     
     @IBAction func startBtn(_ sender: Any) {
@@ -195,6 +195,7 @@ class ViewController: UIViewController {
             currentNode = 0
             percentage = 0
             percentageLabel.text = "\(percentage)%"
+            topLabel.text = "Stampa"
             self.healthConstraintToTop.constant = 400
             self.healthView.backgroundColor = .red
             UIView.animate(withDuration: 1) {

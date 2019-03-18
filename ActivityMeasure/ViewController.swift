@@ -146,7 +146,7 @@ class ViewController: UIViewController {
                 }
                 
                 let percentage =  Int(100 - (self.healthConstraintToTop.constant / 4))
-                percentageLabel.text = "\(percentage)%"
+                self.percentageLabel.text = "\(percentage)%"
                 
             }
            

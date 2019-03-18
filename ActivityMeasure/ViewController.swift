@@ -72,21 +72,23 @@ class ViewController: UIViewController {
                 let roundedGravityZ = round(gravity.z * 100) / 100
                 OperationQueue.main.addOperation {
                     
-                    if abs(gravity.z) > 0.87 && (abs(motion.userAcceleration.x) > 0.7 || abs(motion.userAcceleration.y) > 0.7) {
+                    //IF CHEATING
+                    if abs(gravity.z) > 0.87 && (abs(motion.userAcceleration.x) > 0.6 || abs(motion.userAcceleration.y) > 0.6) {
                         self.cheatingDetected(str : "FUSK1")
-                        self.lastActivityCheat = true
+                        
                     }
                         
-                    else if abs(gravity.x) > 0.5 && (abs(motion.userAcceleration.z) > 0.7 || abs(motion.userAcceleration.y) > 0.7) {
+                    else if abs(gravity.x) > 0.5 && (abs(motion.userAcceleration.z) > 0.6 || abs(motion.userAcceleration.y) > 0.6) {
                         self.cheatingDetected(str : "FUSK2")
-                        self.lastActivityCheat = true
+                        
                     }
                         
-                    else if abs(gravity.y) > 0.5 && (abs(motion.userAcceleration.x) > 0.7 || abs(motion.userAcceleration.z) > 0.7) {
+                    else if abs(gravity.y) > 0.5 && (abs(motion.userAcceleration.x) > 0.6 || abs(motion.userAcceleration.z) > 0.6) {
                         self.cheatingDetected(str : "FUSK3")
-                        self.lastActivityCheat = true
                     }
+                    //IF not cheating
                     else{
+                        //Check if last activity was cheat
                         if self.lastActivityCheat == true{
                             self.lastActivityCheat = false
                         }
@@ -124,6 +126,7 @@ class ViewController: UIViewController {
         print(str)
         self.view.backgroundColor = .red
         topLabel.text = "Fusk!"
+        self.lastActivityCheat = true
         
     }
     
@@ -136,7 +139,7 @@ class ViewController: UIViewController {
         
         // Get the speed of activity by dividing sum of values with nodes/.count
         let activityFactor = activitySum / Double(activityArray.count)
-        if activityFactor > 0.4{
+        if activityFactor > 0.5{
             activityFilter(activityFactor: Double(activityFactor))
         }
     }

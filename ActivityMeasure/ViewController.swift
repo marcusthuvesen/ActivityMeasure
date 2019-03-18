@@ -86,6 +86,9 @@ class ViewController: UIViewController {
                         
                         self.view.backgroundColor = .black
                         
+                        if percentage > 50{
+                            self.healthView.backgroundColor = .green
+                        }
                         self.accelerationArray.append(self.acceleration)
                         
                         // Add Values to Array
@@ -141,13 +144,10 @@ class ViewController: UIViewController {
                 UIView.animate(withDuration: 1) {
                     self.view.layoutIfNeeded()
                 }
-               
+                
                 let percentage =  Int(100 - (self.healthConstraintToTop.constant / 4))
                 percentageLabel.text = "\(percentage)%"
                 
-                if percentage > 50{
-                    self.healthView.backgroundColor = .green
-                }
             }
            
         }

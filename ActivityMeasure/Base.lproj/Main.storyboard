@@ -46,7 +46,7 @@
                                     <constraint firstItem="kw8-sz-peK" firstAttribute="centerY" secondItem="7Vk-HS-Qn9" secondAttribute="centerY" id="hhW-3h-Ht3"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UoV-bJ-ok1">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stampa" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UoV-bJ-ok1">
                                 <rect key="frame" x="100" y="40" width="175" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="gt2-IG-zTq"/>

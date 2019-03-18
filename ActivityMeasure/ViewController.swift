@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     var acceleration : Double = 0
     var timeInterval : Double = 20
     var batchNumbersArray = [Double]()
+    var percentage = 0
     
     @IBOutlet weak var topLabel: UILabel!
     @IBOutlet weak var healthContainer: UIView!
@@ -26,6 +27,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var startBtnOutlet: UIButton!
     @IBOutlet weak var restartBtnOutlet: UIButton!
     @IBOutlet weak var healthConstraintToTop: NSLayoutConstraint!
+    @IBOutlet weak var percentageLabel: UILabel!
+    
     
     
     override func viewDidLoad() {
@@ -35,6 +38,7 @@ class ViewController: UIViewController {
         healthView.layer.cornerRadius = 15
         startBtnOutlet.layer.cornerRadius = startBtnOutlet.frame.height/2
         restartBtnOutlet.layer.cornerRadius = restartBtnOutlet.frame.height/2
+        
     }
     
     func startAccelerometer(){
@@ -123,7 +127,7 @@ class ViewController: UIViewController {
         
         // Get the speed of activity by dividing sum of values with nodes/.count
         let activityFactor = activitySum / Double(activityArray.count)
-        if activityFactor > 0.3{
+        if activityFactor > 0.4{
             activityFilter(activityFactor: Double(activityFactor))
         }
     }
@@ -136,6 +140,13 @@ class ViewController: UIViewController {
                 self.healthConstraintToTop.constant -= CGFloat(20)
                 UIView.animate(withDuration: 1) {
                     self.view.layoutIfNeeded()
+                }
+               
+                let percentage =  Int(100 - (self.healthConstraintToTop.constant / 4))
+                percentageLabel.text = "\(percentage)%"
+                
+                if percentage > 50{
+                    self.healthView.backgroundColor = .green
                 }
             }
            
@@ -169,7 +180,10 @@ class ViewController: UIViewController {
             startAccelerometer()
             isDeviceMotionOn = true
             currentNode = 0
-             self.healthConstraintToTop.constant = 400
+            percentage = 0
+            percentageLabel.text = "\(percentage)%"
+            self.healthConstraintToTop.constant = 400
+            self.healthView.backgroundColor = .red
             UIView.animate(withDuration: 1) {
                self.view.layoutIfNeeded()
             }

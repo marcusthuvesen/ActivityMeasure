@@ -22,17 +22,28 @@
                                 <rect key="frame" x="110" y="117" width="155" height="400"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7BF-HT-0Nu">
-                                        <rect key="frame" x="0.0" y="380" width="155" height="20"/>
+                                        <rect key="frame" x="0.0" y="400" width="155" height="0.0"/>
                                         <color key="backgroundColor" red="1" green="0.2156862745" blue="0.1333333333" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kw8-sz-peK">
+                                        <rect key="frame" x="37.5" y="180" width="80" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="6Bs-H1-74V"/>
+                                            <constraint firstAttribute="height" constant="40" id="Enc-cd-O4k"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="7BF-HT-0Nu" firstAttribute="top" secondItem="7Vk-HS-Qn9" secondAttribute="top" constant="380" id="Q6L-uX-Hpq"/>
+                                    <constraint firstItem="kw8-sz-peK" firstAttribute="centerX" secondItem="7Vk-HS-Qn9" secondAttribute="centerX" id="I5t-ne-OLT"/>
+                                    <constraint firstItem="7BF-HT-0Nu" firstAttribute="top" secondItem="7Vk-HS-Qn9" secondAttribute="top" constant="400" id="Q6L-uX-Hpq"/>
                                     <constraint firstAttribute="trailing" secondItem="7BF-HT-0Nu" secondAttribute="trailing" id="Qc9-QS-7ks"/>
                                     <constraint firstAttribute="bottom" secondItem="7BF-HT-0Nu" secondAttribute="bottom" id="X89-56-PKP"/>
                                     <constraint firstAttribute="height" constant="400" id="dYD-qj-wAV"/>
                                     <constraint firstItem="7BF-HT-0Nu" firstAttribute="leading" secondItem="7Vk-HS-Qn9" secondAttribute="leading" id="dvC-0c-TpH"/>
+                                    <constraint firstItem="kw8-sz-peK" firstAttribute="centerY" secondItem="7Vk-HS-Qn9" secondAttribute="centerY" id="hhW-3h-Ht3"/>
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UoV-bJ-ok1">
@@ -92,6 +103,7 @@
                         <outlet property="healthConstraintToTop" destination="Q6L-uX-Hpq" id="ZlF-w5-vQn"/>
                         <outlet property="healthContainer" destination="7Vk-HS-Qn9" id="gBw-lp-zeE"/>
                         <outlet property="healthView" destination="7BF-HT-0Nu" id="ImH-f6-VVa"/>
+                        <outlet property="percentageLabel" destination="kw8-sz-peK" id="uPy-jE-Rpx"/>
                         <outlet property="restartBtnOutlet" destination="yUu-Me-Xe3" id="cXB-hF-tLu"/>
                         <outlet property="startBtnOutlet" destination="OjF-KN-FE4" id="p3H-JX-HIr"/>
                         <outlet property="topLabel" destination="UoV-bJ-ok1" id="YSh-P4-2V2"/>
